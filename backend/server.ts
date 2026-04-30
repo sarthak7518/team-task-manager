@@ -29,7 +29,8 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/users", userRoutes);
 
 // Serve frontend static files
-const frontendPath = path.join(__dirname, "../public");
+const frontendPath = path.join(__dirname, "public");
+console.log("Serving frontend from:", frontendPath);
 app.use(express.static(frontendPath));
 
 // SPA catch-all: serve index.html for any non-API route
