@@ -2,6 +2,9 @@
   "name": "team-task-manager",
   "version": "1.0.0",
   "description": "Full Stack Team Task Manager",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "main": "index.js",
   "scripts": {
     "postinstall": "cd backend && npm install && cd ../frontend && npm install",
