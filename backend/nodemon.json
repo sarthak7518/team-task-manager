@@ -1,0 +1,5 @@
+{
+  "watch": ["*.ts", "routes/*.ts", "middleware/*.ts"],
+  "ignore": ["node_modules", "dist", "*.db", "*.db-journal"],
+  "ext": "ts"
+}
