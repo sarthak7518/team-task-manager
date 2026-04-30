@@ -29,7 +29,7 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/users", userRoutes);
 
 // Serve frontend static files
-const frontendPath = path.join(__dirname, "../../frontend/dist");
+const frontendPath = path.join(__dirname, "../public");
 app.use(express.static(frontendPath));
 
 // SPA catch-all: serve index.html for any non-API route
