@@ -1,20 +1,17 @@
-FROM node:20-alpine
+FROM node:20-slim
+
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Copy everything
 COPY . .
 
-# Install dependencies
 RUN cd backend && npm install && cd ../frontend && npm install
 
-# Build frontend
 RUN cd frontend && npm run build
 
-# Build backend
 RUN cd backend && npx prisma generate && npx tsc
 
-# Copy frontend into backend/dist/public
 RUN cp -r frontend/dist backend/dist/public
 
 WORKDIR /app/backend
