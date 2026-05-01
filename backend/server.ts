@@ -28,9 +28,23 @@ app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/users", userRoutes);
 
-// Serve frontend static files
-const frontendPath = path.join(__dirname, "public");
+// Find frontend files - check multiple possible paths
+import fs from "fs";
+const searchPaths = [
+  path.join(__dirname, "public"),
+  path.join(__dirname, "../public"),
+  path.join(__dirname, "../../frontend/dist"),
+  path.join(__dirname, "../frontend/dist"),
+  path.join(process.cwd(), "public"),
+  path.join(process.cwd(), "dist/public"),
+  path.join(process.cwd(), "frontend/dist"),
+  path.join(process.cwd(), "../frontend/dist"),
+];
+const frontendPath = searchPaths.find(p => fs.existsSync(path.join(p, "index.html"))) || searchPaths[0];
+console.log("__dirname:", __dirname);
+console.log("cwd:", process.cwd());
 console.log("Serving frontend from:", frontendPath);
+console.log("index.html exists:", fs.existsSync(path.join(frontendPath, "index.html")));
 app.use(express.static(frontendPath));
 
 // SPA catch-all: serve index.html for any non-API route
